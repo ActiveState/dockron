@@ -1,12 +1,13 @@
 package main
 
-import "strings"
-import "os/signal"
-import "syscall"
+import "github.com/ActiveState/log"
+import "github.com/robfig/cron"
 import "os"
 import "os/exec"
+import "os/signal"
+import "strings"
 import "sync"
-import "github.com/robfig/cron"
+import "syscall"
 
 type Cron struct {
 	*cron.Cron
@@ -16,18 +17,18 @@ type Cron struct {
 }
 
 func NewCron(schedule string, command string, args []string) *Cron {
-	println("New cron:", schedule)
+	log.Infof("New cron: %v", schedule)
 	c := &Cron{cron.New(), &sync.WaitGroup{}}
 
 	c.AddFunc(schedule, func() {
 		c.wg.Add(1)
 
-		println("Executing:", command, strings.Join(args, " "))
+		log.Infof("Executing: %v %v", command, strings.Join(args, " "))
 		err := execute(command, args)
 		if err != nil {
-			println("Failed:", err)
-		}else{
-			print("Succeeded")
+			log.Warnf("Failed: %v", err)
+		} else {
+			log.Info("Succeeded")
 		}
 		c.wg.Done()
 	})
@@ -35,11 +36,11 @@ func NewCron(schedule string, command string, args []string) *Cron {
 }
 
 func (c *Cron) Stop() {
-	println("Stopping cron")
+	log.Warn("Stopping cron")
 	c.Cron.Stop()
-	println("Waiting")
+	log.Info("Waiting")
 	c.wg.Wait()
-	print("Exiting")
+	log.Info("Exiting")
 }
 
 // execute executes the given command
@@ -62,7 +63,7 @@ func main() {
 
 	ch := make(chan os.Signal, 1)
 	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
-	println(<-ch)
+	log.Warnf("%v", <-ch)
 
 	c.Stop()
 	os.Exit(1)

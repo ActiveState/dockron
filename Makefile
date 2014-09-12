@@ -1,4 +1,4 @@
-all:	build
+all:	fmt build
 	@echo
 
 build:
@@ -6,3 +6,6 @@ build:
 
 run:
 	docker run --rm activestate/dockron "* * * * *" /bin/bash -c "echo Hello world"
+
+fmt:
+	gofmt -w .
