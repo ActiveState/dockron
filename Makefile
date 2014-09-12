@@ -1,4 +1,4 @@
-all:	fmt build
+all:	build
 	@echo
 
 build:
