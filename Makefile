@@ -5,4 +5,4 @@ build:
 	docker build -t activestate/dockron .
 
 run:
-	docker run --rm activestate/dockron
+	docker run --rm activestate/dockron "* * * * *" /bin/bash -c "echo Hello world"
