@@ -50,11 +50,7 @@ func execute(command string, args []string) error {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	err := cmd.Run()
-	if err != nil {
-		return err
-	}
-	return cmd.Wait()
+	return cmd.Run()
 }
 
 func main() {
