@@ -9,7 +9,6 @@ import "strings"
 import "sync"
 import "syscall"
 
-
 type Cron struct {
 	*cron.Cron
 	// WaitGroup is used to ensure that at most a single instance
@@ -18,7 +17,7 @@ type Cron struct {
 }
 
 func NewCron(schedule string, command string, args []string) *Cron {
-	log.Infof("New cron: %v", schedule)
+	log.Infof("Running per schedule: %v", schedule)
 	c := &Cron{cron.New(), &sync.WaitGroup{}}
 
 	c.AddFunc(schedule, func() {

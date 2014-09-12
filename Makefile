@@ -11,4 +11,4 @@ test:
 	docker run --rm --entrypoint=go activestate/dockron test -v ./... github.com/robfig/cron
 
 fmt:
-	gofmt -w .
+	go fmt
