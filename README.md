@@ -26,9 +26,9 @@ Logging
 
 The dockron container will log appropriately such that you may setup
 log triggers to get notified if a command fails to run. This is
-especially when you are managing containers using
+especially useful when you are managing containers using
 [Papertrail](https://papertrailapp.com) and
-[logspout](https://github.com/progrium/logspout). This is infact a
-great reason to use dockron instead of crontab on the docker host; the
+[logspout](https://github.com/progrium/logspout), and as such demonstrates
+the reason for using dockron instead of crontab on the docker host; the
 scheduler is no different from that which it schedules, as all of them
 are docker containers, and managed in the same way.
