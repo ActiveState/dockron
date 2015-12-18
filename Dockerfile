@@ -1,3 +1,3 @@
-FROM golang:1.3.1-onbuild
+FROM golang:1.5.2-onbuild
 
 ENTRYPOINT ["/go/bin/app"]
